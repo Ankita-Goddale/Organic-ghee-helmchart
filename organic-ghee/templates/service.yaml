@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-service
+  namespace: {{ .Values.namespace }}
+spec:
+  type: {{ .Values.organic.service.type }}  
+  ports:
+    - port: {{ .Values.organic.service.port }}
+      targetPort: {{ .Values.organic.port }}
+      protocol: TCP
+  selector:
+    app: {{ .Values.organic.labels.app }}

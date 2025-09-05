@@ -1,0 +1,28 @@
+namespace: ankita
+
+mongodb:
+  replicas: 1
+  labels:
+    app: mongodb
+  name: mongodb
+  image:
+    repository: mongo
+    tag: latest
+  port: 27017
+  service:
+    port: 27017
+  type: Opaque
+  uri: bW9uZ29kYjovL21vbmdvZGI6MjcwMTcvcmVzdG9yZW50
+
+organic:
+  replicas: 2
+  labels:
+    app: organic-ghee
+  name: organic-ghee-app
+  image:
+    repository: ankita1809/organic-ghee
+    tag: v1
+  port: 5656
+  service:
+    port: 5656
+    type: LoadBalancer

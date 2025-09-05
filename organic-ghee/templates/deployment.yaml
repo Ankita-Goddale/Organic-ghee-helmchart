@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.organic.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.organic.labels.app }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.organic.labels.app }}
+    spec:
+      containers:
+      - name: {{ .Values.organic.name }}
+        image: "{{ .Values.organic.image.repository }}:{{ .Values.organic.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.organic.port }}  # Change to match your app's port
+        envFrom:
+          - secretRef:
+              name: {{ .Release.Name }}-secret
